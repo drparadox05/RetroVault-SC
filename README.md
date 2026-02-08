@@ -1,4 +1,4 @@
-# 🦅 **MEVhawk: Autonomous Volatility Farming**
+# 🦅 **RetroVault: Autonomous Volatility Farming**
 > *Stop letting your assets sit idle. Use MEV searchers to farm volatility for you.*
 
 ## 🚀 The Problem
@@ -8,7 +8,7 @@ In DeFi, passive liquidity providing or holding tokens often means missing out o
 - **Manual Trading** is impossible 24/7.
 
 ## 💡 The Solution
-**MEVhawk** is a protocol that allows users to deploy capital into vaults that execute strategies **autonomously**, powered by MEV searchers. Instead of relying on a centralized keeper network or manual intervention, our strategies are designed to be profitable for **anyone** to execute.
+**RetroVault** is a protocol that allows users to deploy capital into vaults that execute strategies **autonomously**, powered by MEV searchers. Instead of relying on a centralized keeper network or manual intervention, our strategies are designed to be profitable for **anyone** to execute.
 
 When market conditions align with a strategy (e.g., "Buy the Dip" when ETH drops 5%), the protocol pays an immediate **ETH bounty** to the first person (or bot) who executes the trade. This ensures:
 - **100% Uptime**: The entire global network of MEV searchers works for you.
