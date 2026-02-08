@@ -1,66 +1,36 @@
-## Foundry
+# 🦅 **MEVhawk: Autonomous Volatility Farming**
+> *Stop letting your assets sit idle. Use MEV searchers to farm volatility for you.*
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## 🚀 The Problem
+In DeFi, passive liquidity providing or holding tokens often means missing out on short-term opportunities.
+- **Limit Orders** are static and capital inefficient.
+- **Centralized Bots** are risky and require constant maintenance.
+- **Manual Trading** is impossible 24/7.
 
-Foundry consists of:
+## 💡 The Solution
+**MEVhawk** is a protocol that allows users to deploy capital into vaults that execute strategies **autonomously**, powered by MEV searchers. Instead of relying on a centralized keeper network or manual intervention, our strategies are designed to be profitable for **anyone** to execute.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+When market conditions align with a strategy (e.g., "Buy the Dip" when ETH drops 5%), the protocol pays an immediate **ETH bounty** to the first person (or bot) who executes the trade. This ensures:
+- **100% Uptime**: The entire global network of MEV searchers works for you.
+- **Trustless Execution**: Code is law. The strategy only executes if conditions are met.
+- **Capital Efficiency**: Assets are only moved when opportunities arise.
 
-## Documentation
+## ⚙️ How It Works
 
-https://book.getfoundry.sh/
+1. **User Deposits**: Users deposit assets (e.g. USDC, WETH) into the **Vault**.
+2. **Strategy Activation**: The Vault activates strategies like `DipBuyingStrategy` or `PeakSellingStrategy`.
+3. **Market Monitoring**:
+    - The Strategy monitors Uniswap V3 pools using an on-chain Oracle.
+    - It checks for specific conditions, like a 5% price drop over a 1-hour TWAP window.
+4. **MEV Execution**:
+    - Once the condition is met, the function `execute()` becomes callable.
+    - MEV searchers race to call this function.
+    - The winner executes the logic (e.g., swap USDC -> WETH on Uniswap) and receives an **ETH Bounty**.
 
-## Usage
+## 🏗️ Architecture
 
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- **`Vault.sol`**: The core contract holding user funds and managing strategy permissions.
+- **`IStrategy.sol`**: A standard interface for all strategies.
+- **`DipBuyingStrategy.sol`**: Buys a target token when its price drops by a configurable threshold.
+- **`PeakSellingStrategy.sol`**: Sells a target token when its price rises by a configurable threshold.
+- **`UniswapOracleLib.sol`**: Library for querying Uniswap V3 observations for time-weighted average prices (TWAP).
